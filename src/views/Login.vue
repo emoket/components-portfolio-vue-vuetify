@@ -46,6 +46,10 @@
         >
           로그인
         </v-btn>
+
+        <v-btn class="v-btn-close" icon>
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
       </v-form>
     </div>
   </div>
@@ -117,7 +121,7 @@ div#login {
   top: 0;
   left: 0;
   z-index: 9999;
-  background-color: #eeeeee;
+  background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,7 +130,7 @@ div#login {
 }
 
 div#login div#description {
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.6);
   width: 280px;
   padding: 35px;
 }
@@ -151,30 +155,9 @@ div#login div#form {
   padding: 35px;
 }
 
-@media screen and (max-width: 600px) {
-  div#login {
-    align-items: unset;
-    background-color: unset;
-    display: unset;
-    justify-content: unset;
-  }
-
-  div#login div#description {
-    margin: 0 auto;
-    max-width: 350px;
-    width: 100%;
-  }
-
-  div#login div#form {
-    border-radius: unset;
-    box-shadow: unset;
-    width: 100%;
-  }
-
-  div#login div#form form {
-    margin: 0 auto;
-    max-width: 280px;
-    width: 100%;
-  }
+div#form .v-btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>
