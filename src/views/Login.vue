@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data: () => ({
     password_rules: [
@@ -70,6 +72,7 @@ export default {
     hidePassword: true
   }),
   computed: {
+    ...mapGetters(["getToken"]),
     password_type() {
       return this.hidePassword ? "password" : "text";
     },
@@ -88,13 +91,14 @@ export default {
       this.$http
         .post(login_url, { email, password })
         .then(response => {
-          const token = response.data;
+          const { token } = response.data;
           console.log(token);
           // localStorage.setItem("user", JSON.stringify(response.data.user));
-          localStorage.setItem("jwt", token);
+          // localStorage.setItem("jwt", token);
 
-          if (localStorage.getItem("jwt")) {
-            // this.$emit("loggedIn");
+          this.$store.commit("login", token);
+
+          if (this.getToken) {
             if (this.$route.params.nextUrl) {
               this.$router.push(this.$route.params.nextUrl);
             } else {

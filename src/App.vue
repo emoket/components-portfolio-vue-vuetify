@@ -48,8 +48,10 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn color="primary" dark to="login">Sign In</v-btn>
-      <v-btn color="primary" dark @click="do_logout">Sign Out</v-btn>
+      <v-btn v-if="getToken" color="primary" dark @click="do_logout">
+        Sign Out
+      </v-btn>
+      <v-btn v-else color="primary" dark to="login">Sign In</v-btn>
     </v-app-bar>
 
     <v-main>
@@ -65,6 +67,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "App",
 
@@ -90,10 +94,16 @@ export default {
       }
     ]
   }),
+  computed: {
+    ...mapGetters(["getToken"])
+  },
+  created() {},
   methods: {
     do_logout() {
-      localStorage.removeItem("jwt");
-      // localStorage.removeItem("user");
+      // localStorage.removeItem("jwt");
+      this.$store.commit("logout");
+
+      console.log(this.$router.path);
 
       if (this.$router.path !== "/") {
         this.$router.push("/");
