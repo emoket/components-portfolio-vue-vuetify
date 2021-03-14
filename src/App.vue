@@ -49,10 +49,11 @@
       <v-spacer></v-spacer>
 
       <v-btn color="primary" dark to="login">Sign In</v-btn>
+      <v-btn color="primary" dark @click="do_logout">Sign Out</v-btn>
     </v-app-bar>
 
     <v-main>
-      <transition name="fade">
+      <transition name="fade" mode="out-in">
         <router-view></router-view>
       </transition>
     </v-main>
@@ -88,7 +89,17 @@ export default {
         route: "admin"
       }
     ]
-  })
+  }),
+  methods: {
+    do_logout() {
+      localStorage.removeItem("jwt");
+      // localStorage.removeItem("user");
+
+      if (this.$router.path !== "/") {
+        this.$router.push("/");
+      }
+    }
+  }
 };
 </script>
 
